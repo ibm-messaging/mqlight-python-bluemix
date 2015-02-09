@@ -1,0 +1,11 @@
+---
+applications:
+- name: MQL.sample.python.backend
+  disk_quota: 1024M
+  command: python python-backend.py
+  memory: 128M
+  instances: 1
+  no-route: true
+  - services:
+    - MQ Light-sampleservice
+
