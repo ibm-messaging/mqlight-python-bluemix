@@ -8,4 +8,12 @@ applications:
   no-route: true
   - services:
     - MQ Light-sampleservice
+- name: MQL.sample.python.frontend
+  disk_quota: 1024M
+  command: python python-frontend.py
+  memory: 128M
+  instances: 1
+  no-route: true
+  - services:
+    - MQ Light-sampleservice
 
