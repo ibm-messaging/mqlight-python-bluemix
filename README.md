@@ -10,4 +10,5 @@ for more info on these samples.
 
 ```
 $ cf push MQL.sample.python.backend
+$ cf push MQL.sample.python.frontend
 ```
