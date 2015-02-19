@@ -2,18 +2,21 @@
 applications:
 - name: MQL.sample.python.backend
   disk_quota: 1024M
+  buildpack: python_buildpack
+  path: backend
   command: python python-backend.py
   memory: 128M
   instances: 1
   no-route: true
-  - services:
-    - MQ Light-sampleservice
+  services:
+  - MQLight-sampleservice
 - name: MQL.sample.python.frontend
   disk_quota: 1024M
+  buildpack: python_buildpack
+  path: frontend
   command: python python-frontend.py
   memory: 128M
   instances: 1
-  no-route: true
-  - services:
-    - MQ Light-sampleservice
-
+  host: mqlightsample-python-${random-word}
+  services:
+  - MQLight-sampleservice
