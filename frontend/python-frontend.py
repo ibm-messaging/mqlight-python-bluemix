@@ -25,7 +25,7 @@ if os.environ.get('VCAP_SERVICES'):
     vcap_services = os.environ.get('VCAP_SERVICES')
     decoded = json.loads(vcap_services)['mqlight'][0]
 
-    service = str(decoded['credentials']['nonTLSConnectionLookupURI'])
+    service = str(decoded['credentials']['connectionLookupURI'])
     username = str(decoded['credentials']['username'])
     password = str(decoded['credentials']['password'])
     security_options = {
