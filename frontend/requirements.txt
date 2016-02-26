@@ -1,2 +1,2 @@
-mqlight>=1.0.2015020201b1
+git+git://github.com/mqlight/python-mqlight.git@readthedocs
 bottle
