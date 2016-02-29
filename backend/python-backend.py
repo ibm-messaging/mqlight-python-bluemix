@@ -12,22 +12,30 @@ import os, json
 import mqlight
 import uuid
 
+MQLIGHT_SERVICE_NAME = 'mqlight'
+MESSAGEHUB_SERVICE_NAME = 'messagehub'
 SUBSCRIBE_TOPIC = 'mqlight/sample/words'
 PUBLISH_TOPIC = 'mqlight/sample/wordsuppercase'
 SHARE_ID = 'python-back-end'
 CLIENT_ID = 'python_backend_' + str(uuid.uuid4()).replace('-', '_')[0:7]
 
 if os.environ.get('VCAP_SERVICES'):
-    vcap_services = os.environ.get('VCAP_SERVICES')
-    decoded = json.loads(vcap_services)['mqlight'][0]
-
-    service = str(decoded['credentials']['connectionLookupURI'])
-    username = str(decoded['credentials']['username'])
-    password = str(decoded['credentials']['password'])
-    security_options = {
-        'property_user': username,
-        'property_password': password
-    }
+    vcap_services = json.loads(os.environ.get('VCAP_SERVICES'))
+    for vcap_service in vcap_services:
+        if vcap_service.startswith(MQLIGHT_SERVICE_NAME):
+            mqlight_service = vcap_services[vcap_service][0]
+            service = str(mqlight_service['credentials']['nonTLSConnectionLookupURI'])
+            security_options = {
+                'property_user': str(mqlight_service['credentials']['username']),
+                'property_password': str(mqlight_service['credentials']['password'])
+            }
+        elif vcap_service.startswith(MESSAGEHUB_SERVICE_NAME):
+            messagehub_service = vcap_services[vcap_service][0]
+            service = str(messagehub_service['credentials']['connectionLookupURI'])
+            security_options = {
+                'property_user': str(messagehub_service['credentials']['user']),
+                'property_password': str(messagehub_service['credentials']['password'])
+            }
 else:
     service = 'amqp://127.0.0.1:5672'
     security_options = {}
