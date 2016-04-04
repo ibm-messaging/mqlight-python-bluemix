@@ -30,15 +30,15 @@ if os.environ.get('VCAP_SERVICES'):
             mqlight_service = vcap_services[vcap_service][0]
             service = str(mqlight_service['credentials']['nonTLSConnectionLookupURI'])
             security_options = {
-                'property_user': str(mqlight_service['credentials']['username']),
-                'property_password': str(mqlight_service['credentials']['password'])
+                'user': str(mqlight_service['credentials']['username']),
+                'password': str(mqlight_service['credentials']['password'])
             }
         elif vcap_service.startswith(MESSAGEHUB_SERVICE_NAME):
             messagehub_service = vcap_services[vcap_service][0]
             service = str(messagehub_service['credentials']['connectionLookupURI'])
             security_options = {
-                'property_user': str(messagehub_service['credentials']['user']),
-                'property_password': str(messagehub_service['credentials']['password'])
+                'user': str(messagehub_service['credentials']['user']),
+                'password': str(messagehub_service['credentials']['password'])
             }
 else:
     service = 'amqp://127.0.0.1:5672'
