@@ -61,12 +61,21 @@ client = mqlight.Client(
     security_options=security_options,
     on_started=subscribe)
 
+def sent(err, topic, data, options):
+    """
+    Message sent callback
+    """
+    if err:
+        print('Problem with send request: {0}'.format(err))
 
 def send_message():
     with LOCK:
         if len(send_queue) > 0:
             message = send_queue.pop(0)
-            client.send(message['topic'], message['message'])
+            client.send(message['topic'],
+                        message['message'],
+                        {'qos': 1},
+                        on_sent=sent)
         timer = threading.Timer(0.2, send_message)
         timer.start()
 

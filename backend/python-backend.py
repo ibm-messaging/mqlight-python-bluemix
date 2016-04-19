@@ -44,6 +44,7 @@ def subscribe(err):
     client.subscribe(
         topic_pattern=SUBSCRIBE_TOPIC,
         share=SHARE_ID,
+        options={'qos': 1},
         on_message=process_message)
 
 client = mqlight.Client(
