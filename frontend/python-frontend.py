@@ -113,7 +113,7 @@ def post_words():
                 'word': word,
                 'frontend': 'Python: {0}'.format(client.get_id())
             }
-            print('Sending response: {0}'.format(message))
+            print('Sending message: {0}'.format(message))
             send_queue.append({
                 'topic': PUBLISH_TOPIC,
                 'message': json.dumps(message)
