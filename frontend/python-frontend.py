@@ -35,7 +35,7 @@ if os.environ.get('VCAP_SERVICES'):
             }
         elif vcap_service.startswith(MESSAGEHUB_SERVICE_NAME):
             messagehub_service = vcap_services[vcap_service][0]
-            service = str(messagehub_service['credentials']['connectionLookupURI'])
+            service = str(messagehub_service['credentials']['mqlight_lookup_url'])
             security_options = {
                 'user': str(messagehub_service['credentials']['user']),
                 'password': str(messagehub_service['credentials']['password'])
