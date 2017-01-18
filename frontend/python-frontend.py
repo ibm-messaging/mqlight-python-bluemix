@@ -61,7 +61,7 @@ client = mqlight.Client(
     security_options=security_options,
     on_started=subscribe)
 
-def sent(err, topic, data, options):
+def sent(client, err, topic, data, options):
     """
     Message sent callback
     """
