@@ -8,6 +8,7 @@ applications:
   memory: 128M
   instances: 1
   no-route: true
+  health-check-type: none
   services:
   - MQLight-sampleservice
 - name: MQL.sample.python.frontend
